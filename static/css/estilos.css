@@ -1,0 +1,86 @@
+/* Estructura general */
+body {
+  margin: 0;
+  padding-top: 80px; /* Ajusta según el alto real de tu navbar */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #E3F2FD; /* Azul claro de fondo */
+  color: #0D47A1; /* Azul oscuro para el texto */
+}
+
+/* Navbar */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: #BBDEFB; /* Azul cielo */
+  padding: 10px 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.nav-img {
+  width: 80px;
+  transition: all 0.3s ease-in-out;
+  filter: brightness(100%);
+}
+
+.nav-img:hover {
+  transform: scale(1.2);
+  filter: brightness(150%) grayscale(100%);
+}
+
+/* Encabezado */
+h1 {
+  color: #1565C0; /* Azul más fuerte */
+  font-size: 2.5rem;
+}
+
+/* Panel y formularios */
+.main {
+  flex: 1;
+  background-color: rgba(187, 222, 251, 0.85); /* Azul claro translúcido */
+  padding: 2em;
+  border-radius: 15px;
+  color: #0D47A1;
+}
+
+.form-control {
+  background-color: #E1F5FE; /* Azul muy claro */
+  color: #0D47A1;
+  border: 1px solid #64B5F6;
+  border-radius: 10px;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.form-control:focus {
+  background-color: #E3F2FD;
+  border-color: #42A5F5;
+  color: #0D47A1;
+}
+
+/* Botones */
+.btn-custom {
+  background-color: #42A5F5; /* Azul principal */
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 10px;
+  transition: all 0.3s ease-in-out;
+  font-size: 16px;
+}
+
+.btn-custom:hover {
+  background-color: #1E88E5;
+  color: #E3F2FD;
+  transform: scale(1.05);
+}
+
+/* Footer */
+.page-footer {
+  background-color: #BBDEFB;
+  color: #0D47A1;
+  text-align: center;
+  padding: 20px 0;
