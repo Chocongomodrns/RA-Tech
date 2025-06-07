@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Mi Perfil{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="card shadow-sm">
+    <div class="card-header bg-primary text-white">
+      <h4 class="mb-0">Mi Perfil</h4>
+    </div>
+    <div class="card-body" id="mostrar-datos">
+      <p><strong>Nombre:</strong> {{ nombre }}</p>
+      <p><strong>Apellidos:</strong> {{ apellidos }}</p>
+      <p><strong>Teléfono:</strong> {{ telefono }}</p>
+      <p><strong>Dirección:</strong> {{ direccion }}</p>
+      <p><strong>Correo:</strong> {{ correo }}</p>
+      <button onclick="mostrarFormulario()" class="btn btn-custom mt-3">Editar</button>
+      <a href="{{ url_for('logout') }}" class="btn btn-danger mt-3">Cerrar sesión</a>
+    </div>
+    <div id="editar-datos" class="card-body" style="display: none;">
+      <form method="POST" action="/actualizar_datos">
+        <label>Nombre:</label>
+        <input type="text" name="nombre" value="{{ nombre or '' }}"><br>
+
+        <label>Apellidos:</label>
+        <input type="text" name="apellidos" value="{{ apellidos or '' }}"><br>
+
+        <label>Dirección:</label>
+        <input type="text" name="direccion" value="{{ direccion or '' }}"><br>
+
+        <label>Teléfono:</label>
+        <input type="text" name="telefono" value="{{ telefono or '' }}"><br>
+
+        <button type="submit" >Confirmar</button>
+        <button type="button" onclick="cancelarEdicion()">Cancelar</button>
+      </form>
+    </div>
+  </div>
+</div>
+<script>
+  function mostrarFormulario() {
+    document.getElementById('mostrar-datos').style.display = 'none';
+    document.getElementById('editar-datos').style.display = 'block';
+  }
+
+  function cancelarEdicion() {
+    document.getElementById('editar-datos').style.display = 'none';
+    document.getElementById('mostrar-datos').style.display = 'block';
+  }
+</script>
+{% endblock %}
