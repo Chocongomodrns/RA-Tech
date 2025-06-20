@@ -52,6 +52,7 @@ class clienteDatos(db.Model):
     telefono = db.Column(db.String(255), nullable=True)
     correo = db.Column(db.String(255), nullable=False)
     password = db.Column(db.String(255), nullable=False)
+    rol = db.Column(db.String(50), nullable = False, default='cliente')
 
     ventas = db.relationship("clienteVenta", back_populates="cliente")
 
@@ -70,46 +71,21 @@ class clienteVenta(db.Model):
     def __repr__(self):
         return f'<Venta¿ {self.producto}>'
 
-class Proveedor(db.Model):
-    __tablename__ = "Proveedor"
-    idProveedor = db.Column(db.Integer, primary_key = True)
-    nombreProveedor = db.Column(db.String(80))
-    #Relacion
-    articuloProveedor = db.relationship('articuloProveedor', back_populates="proveedor")
-
-    def __repr__(self):
-        return f'<Proveedor¿ {self.nombreProveedor}>'
-
 class articuloVentas(db.Model):
     __tablename__ = "articuloVentas"
-    idArticulo = db.Column(db.Integer, primary_key = True)
+    idArticulo = db.Column(db.Integer, primary_key=True)
     nombreArticulo = db.Column(db.String(80))
-    precioArticulo = db.Column(db.Float(2), nullable = True)
-    stockArticulo = db.Column(db.Integer, nullable = True)
-    #Relacion
-    articulosProveedor = db.relationship('articuloProveedor', back_populates="articulo")
+    precioArticulo = db.Column(db.Float(2), nullable=True)
+    stockArticulo = db.Column(db.Integer, nullable=True)
+    imagen = db.Column(db.String(255))  # Nuevo campo para el nombre de archivo
 
     def __repr__(self):
         return f'<Articulo¿ {self.nombreArticulo}>'
 
-class articuloProveedor(db.Model):
-    __tablename__ = "articuloProveedor"
-    idArticuloProveedor = db.Column(db.Integer, primary_key = True)
-    precioArticuloProveedor = db.Column(db.Float(2), nullable = True)
-    nombreArticuloProveedor = db.Column(db.String(80))
-    #Clave Foranea
-    idProveedor = db.Column(db.Integer, db.ForeignKey('Proveedor.idProveedor'), nullable = False)
-    clienteId = db.Column(db.Integer, db.ForeignKey('articuloVentas.idArticulo'), nullable = False)
-    #Relacion
-    proveedor = db.relationship('Proveedor', back_populates="articuloProveedor")
-    articulo = db.relationship('articuloVentas', back_populates="articulosProveedor")
-
-    def __repr__(self):
-        return f'<Articulo¿ {self.nombreArticuloProveedor}>'
-
 @app.route("/", methods = ["GET", "POST"])
 def home():
-    return render_template('home.html')
+    productos = articuloVentas.query.all()
+    return render_template('home.html', productos=productos)
 
 @app.route("/login", methods = ["GET", "POST"])
 def login():
@@ -124,6 +100,7 @@ def login():
             session['usuario_id'] = user.clienteId
             session['usuario'] = user.nombre
             session['correo'] = user.correo
+            session['rol'] = user.rol
             flash('Inicio de esión con exito.')
             return redirect(url_for('home'))
         else:
@@ -218,3 +195,32 @@ def registroCliente():
         return redirect(url_for('login'))   # Redirigir al Login
 
     return render_template ('registroCliente.html')
+
+@app.route("/agregarProducto", methods=["GET", "POST"])
+def agregarProducto():
+    if session.get('rol') != 'admin':
+        flash("Acceso denegado. Se requieren permisos de administrador.")
+        return redirect(url_for('home'))
+
+    if request.method == "POST":
+        nombre = request.form["nombre"]
+        precio = float(request.form["precio"])
+        stock = int(request.form["stock"])
+        imagen = request.form["imagen"]  # nombre del archivo, por ejemplo: "procesador.png"
+
+        nuevo = articuloVentas(
+            nombreArticulo=nombre,
+            precioArticulo=precio,
+            stockArticulo=stock,
+            imagen=imagen
+        )
+        try:
+            db.session.add(nuevo)
+            db.session.commit()
+            flash("Producto agregado con éxito.")
+            return redirect(url_for('catalogo'))
+        except Exception as e:
+            db.session.rollback()
+            flash("Error al guardar el producto: " + str(e))
+
+    return render_template("agregarProducto.html")

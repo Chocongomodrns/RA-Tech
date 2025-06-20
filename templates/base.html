@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% block title %}CompuZone{% endblock %}</title>
+  <title>{% block title %}RA-Tech{% endblock %}</title>
 
   <!-- Bootstrap -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
@@ -22,7 +22,10 @@
 
       <div class="ml-auto">
         {% if 'correo' in session %}
-          <a href="{{ url_for('miPerfil') }}" class="btn btn-outline-success mr-2">Mi Perfil</a>
+          {% if session.get('rol') == 'admin' %}
+            <a href="{{ url_for('agregarProducto') }}" class = "btn btn-custom-adm mr-2">Agregar Productos</a>
+          {% endif %}
+          <a href="{{ url_for('miPerfil') }}" class="btn btn-custom mr-2">Mi Perfil</a>
           <a href="{{ url_for('logout') }}" class="btn btn-danger">Cerrar sesión</a>
         {% else %}
           <a href="{{ url_for('login') }}" class="btn btn-outline-primary mr-2">Iniciar sesión</a>

@@ -1,42 +1,12 @@
 {% extends "base.html" %}
 
-{% block title %}Inicio - CompuZone{% endblock %}
+{% block title %}Inicio - RA - Tech{% endblock %}
 
 {% block content %}
   <div class="text-center">
-    <h1>Bienvenido a CompuZone</h1>
+    <h1>Bienvenido a RA-Tech</h1>
     <p class="lead">Tu tienda de confianza en hardware, periféricos y soluciones tecnológicas.</p>
-
-    <div class="row mt-5">
-      <div class="col-md-4">
-        <div class="card bg-dark text-white h-100">
-          <div class="card-body">
-            <h5 class="card-title">Registra tus Clientes</h5>
-            <p class="card-text">Administra fácilmente tus clientes con nuestro sistema.</p>
-            <a href="{{ url_for('registroCliente') }}" class="btn btn-custom">Ir al Registro</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-4">
-        <div class="card bg-dark text-white h-100">
-          <div class="card-body">
-            <h5 class="card-title">Nuestros Productos</h5>
-            <p class="card-text">Descubre la variedad de componentes y periféricos que ofrecemos.</p>
-            <a href="#" class="btn btn-custom disabled">Próximamente</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-4">
-        <div class="card bg-dark text-white h-100">
-          <div class="card-body">
-            <h5 class="card-title">Contáctanos</h5>
-            <p class="card-text">¿Tienes dudas? Estamos para ayudarte.</p>
-            <a href="#" class="btn btn-custom disabled">Próximamente</a>
-          </div>
-        </div>
-      </div>
+      {% include "catalogo.html" %}
     </div>
   </div>
 {% endblock %}

@@ -1,13 +1,13 @@
 /* Estructura general */
 body {
   margin: 0;
-  padding-top: 80px; /* Ajusta según el alto real de tu navbar */
+  padding-top: 80px;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #E3F2FD; /* Azul claro de fondo */
-  color: #0D47A1; /* Azul oscuro para el texto */
+  background-color: #0F172A; /* Fondo oscuro tecnológico */
+  color: #E2E8F0; /* Texto claro */
 }
 
 /* Navbar */
@@ -16,9 +16,9 @@ body {
   top: 0;
   width: 100%;
   z-index: 1000;
-  background-color: #BBDEFB; /* Azul cielo */
+  background-color: #1E293B; /* Azul gris oscuro */
   padding: 10px 0;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 .nav-img {
@@ -34,38 +34,86 @@ body {
 
 /* Encabezado */
 h1 {
-  color: #1565C0; /* Azul más fuerte */
+  color: #06B6D4; /* Cian brillante */
   font-size: 2.5rem;
 }
 
 /* Panel y formularios */
 .main {
   flex: 1;
-  background-color: rgba(187, 222, 251, 0.85); /* Azul claro translúcido */
+  background-color: rgba(30, 41, 59, 0.9); /* Gris oscuro translúcido */
   padding: 2em;
   border-radius: 15px;
-  color: #0D47A1;
+  color: #E2E8F0;
+}
+
+.card {
+  background-color: #1E293B;
+  border: none;
+  border-radius: 10px;
+}
+
+.card-header {
+  background-color: #06B6D4;
+  color: #0F172A;
 }
 
 .form-control {
-  background-color: #E1F5FE; /* Azul muy claro */
-  color: #0D47A1;
-  border: 1px solid #64B5F6;
+  background-color: #334155;
+  color: #E2E8F0;
+  border: 1px solid #475569;
   border-radius: 10px;
   transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .form-control:focus {
-  background-color: #E3F2FD;
-  border-color: #42A5F5;
-  color: #0D47A1;
+  background-color: #1E293B;
+  border-color: #06B6D4;
+  color: #E2E8F0;
+}
+
+.form-panel {
+  padding: 10px 0;
+}
+
+.form-line {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  gap: 10px;
+}
+
+.form-line label {
+  width: 100px;
+  min-width: 100px;
+}
+
+.form-line input {
+  flex: 1;
+}
+
+.form-control-2 {
+  background-color: #334155;
+  color: #E2E8F0;
+  border: 1px solid #475569;
+  border-radius: 6px;
+  padding: 6px 12px;
+  width: 100%;
+  transition: background-color 0.3s ease;
+}
+
+.form-control-2:focus {
+  background-color: #1E293B;
+  border-color: #06B6D4;
+  outline: none;
+  color: #E2E8F0;
 }
 
 /* Botones */
 .btn-custom {
-  background-color: #42A5F5; /* Azul principal */
+  background-color: #06B6D4;
   border: none;
-  color: white;
+  color: #0F172A;
   font-weight: bold;
   border-radius: 10px;
   transition: all 0.3s ease-in-out;
@@ -73,14 +121,93 @@ h1 {
 }
 
 .btn-custom:hover {
-  background-color: #1E88E5;
-  color: #E3F2FD;
+  background-color: #0EA5E9;
+  color: white;
   transform: scale(1.05);
+}
+
+.btn-custom-adm {
+  background-color: #FF9800;
+  border: none;
+  color: #0F172A;
+  font-weight: bold;
+  border-radius: 10px;
+  transition: all 0.3s ease-in-out;
+  font-size: 16px;
+}
+
+.btn-custom-adm:hover {
+  background-color: #F57C00;
+  color: white;
+  transform: scale(1.05);
+}
+
+.btn-danger {
+  background-color: #EF4444;
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 10px;
+}
+
+.btn-danger:hover {
+  background-color: #DC2626;
+}
+
+.btn-secondary {
+  background-color: #64748B;
+  color: white;
+  border: none;
+  border-radius: 10px;
+}
+
+.btn-secondary:hover {
+  background-color: #475569;
 }
 
 /* Footer */
 .page-footer {
-  background-color: #BBDEFB;
-  color: #0D47A1;
+  background-color: #1E293B;
+  color: #E2E8F0;
   text-align: center;
   padding: 20px 0;
+}
+
+/* Catálogo */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.producto-card {
+  border: 1px solid #64B5F6;
+  border-radius: 15px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: #E3F2FD;
+  color: #0D47A1;
+}
+
+.producto-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 20px rgba(33, 150, 243, 0.3);
+}
+
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+  border-bottom: 1px solid #64B5F6;
+}
+
+.card-precio {
+  font-weight: bold;
+  color: #1E88E5;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 140px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}

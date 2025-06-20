@@ -1,0 +1,21 @@
+<div class="container mt-5">
+  <h2 class="mb-4 text-center">Catálogo de RA-Tech</h2>
+  <div class="row">
+    {% for producto in productos %}
+    <div class="col-md-4 mb-4">
+      <div class="card h-100 shadow-sm">
+          <img src="{{ url_for('static', filename='img/' ~ producto.imagen) }}" class="card-img-top" alt="{{ producto.nombreArticulo }}">
+          <div class="card-body">
+            <h5 class="card-title">{{ producto.nombreArticulo }}</h5>
+            <p class="card-text">Precio: ${{ producto.precioArticulo }}</p>
+            <p class="card-text">Stock: {{ producto.stockArticulo }}</p>
+          </div>
+          <div class="card-footer text-end">
+            <button class="btn btn-custom">Agregar al carrito</button>
+          </div>
+        </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
