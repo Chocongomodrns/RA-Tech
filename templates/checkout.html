@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Checkout{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h2 class="text-center mb-4">Checkout</h2>
+
+    {% if productos %}
+    <table class="table table-dark table-striped text-white">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Precio unitario</th>
+                <th>Cantidad</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in productos %}
+            <tr>
+                <td>{{ item.nombreArticulo }}</td>
+                <td>${{ '%.2f'|format(item.precioUnitario) }}</td>
+                <td>{{ item.cantidad }}</td>
+                <td>${{ '%.2f'|format(item.total) }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h4 class="text-right">Total general: ${{ '%.2f'|format(total_general) }}</h4>
+
+    <div class="text-center mt-4">
+        <form method="POST">
+            <button type="submit" class="btn btn-success">Finalizar Compra</button>
+        </form>
+    </div>
+
+    {% else %}
+    <p class="text-center text-white">Tu carrito está vacío.</p>
+    {% endif %}
+</div>
+{% endblock %}

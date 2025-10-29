@@ -21,6 +21,17 @@
       </a>
 
       <div class="ml-auto">
+
+        <!-- Botón del Carrito -->
+        <a href="{{ url_for('ver_carrito') }}" class="btn btn-custom-adm mr-3 position-relative">
+          🛒 Carrito
+          {% if session.get('carrito') %}
+            <span class="badge badge-success position-absolute" style="top:-5px; right:-10px;">
+              {{ session['carrito']|length }}
+            </span>
+          {% endif %}
+        </a>
+
         {% if 'correo' in session %}
           {% if session.get('rol') == 'admin' %}
             <a href="{{ url_for('agregarProducto') }}" class = "btn btn-custom-adm mr-2">Agregar Productos</a>

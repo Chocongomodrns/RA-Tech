@@ -11,7 +11,10 @@
             <p class="card-text">Stock: {{ producto.stockArticulo }}</p>
           </div>
           <div class="card-footer text-end">
-            <button class="btn btn-custom">Agregar al carrito</button>
+            <form action="{{ url_for('agregar_al_carrito', id_articulo=producto.idArticulo) }}" method="POST">
+              <input type="hidden" name="cantidad" value="1">
+              <button type="submit" class="btn btn-custom">Agregar al carrito 🛒</button>
+            </form>
           </div>
         </div>
     </div>

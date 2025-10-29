@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Historial de Compras{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Historial de compras</h2>
+    {% if historial %}
+        <table class="table table-dark table-striped mt-3">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unitario</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in historial %}
+                <tr>
+                    <td>{{ item.producto }}</td>
+                    <td>{{ item.cantidad }}</td>
+                    <td>${{ '%.2f'|format(item.precioUnitario) }}</td>
+                    <td>${{ '%.2f'|format(item.total) }}</td>
+                    <td>{{ item.fecha.strftime('%d/%m/%Y %H:%M') }}</td> <!-- mostrar fecha -->
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No tienes compras registradas aún.</p>
+    {% endif %}
+    <a href="{{ url_for('miPerfil') }}" class="btn btn-primary mt-3">Volver a mi perfil</a>
+</div>
+{% endblock %}
